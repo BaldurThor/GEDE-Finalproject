@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsk8xgxhqqor7"]
+
+[ext_resource type="Script" uid="uid://kpxrl0hxgfrw" path="res://camera_controller.gd" id="1_grnsu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0isvw"]
+
+[node name="CameraRoot" type="Node3D"]
+script = ExtResource("1_grnsu")
+
+[node name="SpringyCamera" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="CamYaw" type="Node3D" parent="SpringyCamera"]
+unique_name_in_owner = true
+
+[node name="CamPitch" type="Node3D" parent="SpringyCamera/CamYaw"]
+unique_name_in_owner = true
+
+[node name="CameraOffset" type="Node3D" parent="SpringyCamera/CamYaw/CamPitch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.4, 0)
+
+[node name="SpringArm" type="SpringArm3D" parent="SpringyCamera/CamYaw/CamPitch/CameraOffset"]
+unique_name_in_owner = true
+collision_mask = 31
+shape = SubResource("SphereShape3D_0isvw")
+spring_length = 6.0
+
+[node name="Camera" type="Camera3D" parent="SpringyCamera/CamYaw/CamPitch/CameraOffset/SpringArm"]
+unique_name_in_owner = true
+process_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="CameraResetTimeout" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="CameraResetTimeout" to="." method="_on_camera_timer_timeout"]

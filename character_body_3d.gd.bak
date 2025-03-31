@@ -1,0 +1,38 @@
+extends CharacterBody3D
+
+var target_velo: Vector3 = Vector3.ZERO
+@onready var animation_tree: AnimationTree = $AnimationTree
+
+var cam_rotation: float = 0.0
+
+func _physics_process(delta: float) -> void:
+	target_velo = Vector3.ZERO
+	if Input.is_action_pressed("forward"):
+		target_velo.z += 1
+	if Input.is_action_pressed("back"):
+		target_velo.z -= 1
+	if Input.is_action_pressed("left"):
+		target_velo.x += 1
+	if Input.is_action_pressed("right"):
+		target_velo.x -= 1
+	if Input.is_action_just_pressed("lmb"):
+		$Armature/Skeleton3D/RagdollBoneSimulator3D.toggle_collapse()
+	animation_tree['parameters/blend_position'].x = -target_velo.x
+	animation_tree['parameters/blend_position'].y = target_velo.z
+	
+	target_velo = target_velo.rotated(Vector3(0,1,0), cam_rotation)
+	
+	if target_velo.length() > 0.1:
+		$Armature.look_at(global_position - target_velo)
+	
+	target_velo *= 150
+	
+	if not is_on_floor():
+		target_velo.y += get_gravity().y
+	
+	velocity = target_velo * delta
+	move_and_slide()
+
+
+func _on_camera_root_set_cam_rotation(_cam_rotation: float) -> void:
+	cam_rotation = _cam_rotation

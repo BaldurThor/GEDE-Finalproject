@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="RagdollBoneSimulator3D" inherits="PhysicalBoneSimulator3D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="set_collapsed">
+			<return type="void" />
+			<param index="0" name="p_collapsed" type="bool" />
+			<description>
+			</description>
+		</method>
+		<method name="toggle_collapse">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="angular_damping" type="float" setter="set_angular_damping" getter="get_angular_damping" default="1.0">
+		</member>
+		<member name="angular_stiffness" type="float" setter="set_angular_stiffness" getter="get_angular_stiffness" default="1.0">
+		</member>
+		<member name="collision_bone_layer" type="int" setter="set_bone_collision_layer" getter="get_bone_collision_layer" default="1">
+		</member>
+		<member name="collision_bone_mask" type="int" setter="set_bone_collision_mask" getter="get_bone_collision_mask" default="1">
+		</member>
+		<member name="collision_overwrite" type="bool" setter="set_collision_overwrite" getter="get_collision_overwrite" default="false">
+		</member>
+		<member name="jerk_distance" type="float" setter="set_jerk_distance" getter="get_jerk_distance" default="1.0">
+		</member>
+		<member name="linear_damping" type="float" setter="set_linear_damping" getter="get_linear_damping" default="1.0">
+		</member>
+		<member name="linear_stiffness" type="float" setter="set_linear_stiffness" getter="get_linear_stiffness" default="1.0">
+		</member>
+		<member name="maximum_force" type="float" setter="set_maximum_force" getter="get_maximum_force" default="1.0">
+		</member>
+	</members>
+</class>
